@@ -9,6 +9,6 @@ class MakeSpace:
 
 if __name__ == "__main__":
     test = MakeSpace()
-    msg = "나는이따가밥을먹고양치를하고유튜브를보다가12시에잠을잘것이다."
+    msg = "안뇽? 나는 권도완이얌, 그리고 탐정일지도."
     converted_msg = test.convert(msg)
     print(converted_msg)
