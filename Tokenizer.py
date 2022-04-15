@@ -12,30 +12,40 @@ class Tokenizer:
         self.spell_checker=Hanspell()
         self.tokenize = KoNLPy()
         self.candidate_list=[]
-        self.max_score=-99
+
 
     def extract(self,text):
-        spaced_text = self.spacing.convert(text)
-        extracted_text = self._appropriate_checker(spaced_text)
+        extracted_text = self._appropriate_checker(text)
         return extracted_text
 
-    def _appropriate_checker(self,text):
+    def _appropriate_checker(self, text):
 
-        self.candidate_list=[]
-        self.max_score = -99
+        print(text)
+        raw_text_list = text.split(" ")
+        temp_text_list = raw_text_list
 
-        first_time_extract = self.tokenize.analyze(text)
-        checked_text = ""
+        max_score = -99
 
-        return checked_text
+        for (temp_idx,temp), (raw_idx,raw) in zip(enumerate(temp_text_list),enumerate(raw_text_list)):
+            temp_text_list[temp_idx] = temp = self.spell_checker.check(temp)
+            if temp == raw :
+                continue
+            checked_text = " ".join(temp_text_list)
+            tagged = self.tokenize.analyze(checked_text)
 
-    def _recrusive_checker(self,candidate):
-        """
-        TODO: 재귀적으로 돌면서, 각 형태소를 맞춤법 검사를 하거나, 앞뒤로 더해보며 점수가 높은경우에 맞춤법 검사를 함.
+            if max_score <= self.tokenize.evaluate(tagged) :
+                raw_text_list[raw_idx] = temp
 
-        """
+        checked_text = " ".join(temp_text_list)
+        tagged = self.tokenize.analyze(checked_text)
 
+        return tagged
 
 if __name__ == "__main__":
-    print("Something To do")
+    text="안뇽하세요? 나는 이병찬이얌."
+    token = Tokenizer()
+
+    print(token.extract(text))
+
+
 
