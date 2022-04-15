@@ -1,6 +1,6 @@
 from MakeSpace import MakeSpace
 from Hanspell import Hanspell
-from KoNLPy_twi import KoNLPy
+from KoNLPy import KoNLPy
 
 #1. 먼저 띄어쓰기한다
 #2. 띄어쓰기된 단어하나하나 교정해보면서
@@ -15,12 +15,12 @@ class Tokenizer:
 
 
     def extract(self,text):
-        spaced_text = self.spacing.convert(text)
-        extracted_text = self._appropriate_checker(spaced_text)
+        extracted_text = self._appropriate_checker(text)
         return extracted_text
 
-    def _appropriate_checker(self,text):
+    def _appropriate_checker(self, text):
 
+        print(text)
         raw_text_list = text.split(" ")
         temp_text_list = raw_text_list
 
@@ -42,5 +42,10 @@ class Tokenizer:
         return tagged
 
 if __name__ == "__main__":
-    text="안뇽? 나는 권도완이얌, 그리고 탐정일찌도."
+    text="안뇽하세요? 나는 이병찬이얌."
+    token = Tokenizer()
+
+    print(token.extract(text))
+
+
 
