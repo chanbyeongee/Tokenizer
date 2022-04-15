@@ -1,6 +1,6 @@
 from MakeSpace import MakeSpace
 from Hanspell import Hanspell
-from KoNLPy import KoNLPy
+from KoNLPy_twi import KoNLPy
 
 #1. 먼저 띄어쓰기한다
 #2. 띄어쓰기된 단어하나하나 교정해보면서
@@ -26,8 +26,7 @@ class Tokenizer:
 
         max_score = -99
 
-        for (temp_idx,temp), (raw_idx,raw
-                              ) in zip(enumerate(temp_text_list),enumerate(raw_text_list)):
+        for (temp_idx,temp), (raw_idx,raw) in zip(enumerate(temp_text_list),enumerate(raw_text_list)):
             temp_text_list[temp_idx] = temp = self.spell_checker.check(temp)
             if temp == raw :
                 continue
